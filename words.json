@@ -1,0 +1,98 @@
+{
+  "chicago": {
+    "Nom": [
+      {"word": "height", "translation": "hauteur"},
+      {"word": "hub", "translation": "center of activity"},
+      {"word": "skyscraper", "translation": "gratte-ciel"},
+      {"word": "tune", "translation": "mélodie"},
+      {"word": "architecture", "translation": "architecture"},
+      {"word": "attraction", "translation": "attraction"},
+      {"word": "skyline", "translation": "ligne d’horizon"},
+      {"word": "vantage point", "translation": "meilleur point de vue"},
+      {"word": "view", "translation": "vue"},
+      {"word": "landmark", "translation": "monument"},
+      {"word": "moth", "translation": "papillon de nuit"},
+      {"word": "trading post", "translation": "poste d’échange"},
+      {"word": "barn", "translation": "grange"},
+      {"word": "dairy owner", "translation": "propriétaire de laiterie"},
+      {"word": "discrimination", "translation": "discrimination"},
+      {"word": "scapegoat", "translation": "bouc émissaire"},
+      {"word": "cow shed", "translation": "étable"},
+      {"word": "tenant", "translation": "locataire"},
+      {"word": "mural", "translation": "fresque"},
+      {"word": "citizen", "translation": "citoyen"},
+      {"word": "rumour", "translation": "rumeur"}
+    ],
+    "Adjectif": [
+      {"word": "hip", "translation": "stylish, trendy"},
+      {"word": "large", "translation": "big"},
+      {"word": "multifaceted", "translation": "multifacette"},
+      {"word": "strange", "translation": "weird"},
+      {"word": "breathtaking", "translation": "époustouflant"},
+      {"word": "distinctive", "translation": "distinctif"},
+      {"word": "impressive", "translation": "impressionnant"},
+      {"word": "downside", "translation": "inconvénient"},
+      {"word": "must-see", "translation": "incontournable"},
+      {"word": "booming", "translation": "prosperous"},
+      {"word": "liveable", "translation": "vivable"},
+      {"word": "Midwestern", "translation": "originaire du Midwest américain"},
+      {"word": "multicultural", "translation": "multiculturel"},
+      {"word": "reliable", "translation": "fiable"},
+      {"word": "renowned", "translation": "famous"},
+      {"word": "vibrant", "translation": "lively"},
+      {"word": "guilty", "translation": "coupable"},
+      {"word": "unproven", "translation": "infondé"},
+      {"word": "thriving", "translation": "prosperous"}
+    ],
+    "Verbe": [
+      {"word": "draw", "translation": "dessiner"},
+      {"word": "feast", "translation": "eat well"},
+      {"word": "go sightseeing", "translation": "faire du tourisme"},
+      {"word": "look up", "translation": "lever les yeux"},
+      {"word": "stand out", "translation": "se démarquer"},
+      {"word": "coop up", "translation": "rester enfermé"},
+      {"word": "enjoy", "translation": "have fun"},
+      {"word": "layer up", "translation": "se couvrir"},
+      {"word": "live on a budget", "translation": "faire attention à ses dépenses"},
+      {"word": "put up with sth", "translation": "tolérer qqch"},
+      {"word": "blaze", "translation": "réduire en cendres"},
+      {"word": "accuse sb with sth", "translation": "accuser qqn de qqch"},
+      {"word": "be wrongly accused of", "translation": "être accusé à tort de"},
+      {"word": "blame sb for", "translation": "rejeter la faute sur qqn pour"},
+      {"word": "burn sth on the ground", "translation": "réduire en cendres"},
+      {"word": "confess to", "translation": "avouer"},
+      {"word": "debunk", "translation": "démystifier"},
+      {"word": "find sb guilty/innocent", "translation": "déclarer qqn coupable/innocent"},
+      {"word": "make up", "translation": "inventer"},
+      {"word": "milk", "translation": "traire"},
+      {"word": "put the blame on sb for sth", "translation": "rejeter la responsabilité sur qqn pour qqch"},
+      {"word": "discriminate against sb", "translation": "discriminer qqn"}
+    ],
+    "Expression": [
+      {"word": "windy city", "translation": "chicago’s nickname"},
+      {"word": "rumour has it", "translation": "selon la rumeur"}
+    ]
+  },
+  "series": {
+    "Nom": [
+      {"word": "episode", "translation": "épisode"},
+      {"word": "season", "translation": "saison"},
+      {"word": "character", "translation": "personnage"},
+      {"word": "plot", "translation": "intrigue"},
+      {"word": "setting", "translation": "cadre"}
+    ],
+    "Adjectif": [
+      {"word": "dramatic", "translation": "dramatique"},
+      {"word": "engaging", "translation": "captivant"},
+      {"word": "suspenseful", "translation": "palpitant"}
+    ],
+    "Verbe": [
+      {"word": "binge-watch", "translation": "regarder en rafale"},
+      {"word": "stream", "translation": "diffuser en continu"}
+    ],
+    "Expression": [
+      {"word": "cliffhanger", "translation": "fin en suspens"},
+      {"word": "plot twist", "translation": "rebondissement"}
+    ]
+  }
+}
