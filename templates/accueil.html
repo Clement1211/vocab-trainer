@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocab Trainer - Accueil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 36px;
+      color: #333;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Choisissez votre DS</h1>
+    
+    <label for="dsSelect">Choisissez votre DS :</label>
+    <select id="dsSelect" onchange="loadSubCategories()">
+      <option value="">Sélectionnez un DS</option>
+      {% for ds in ds_list %}
+        <option value="{{ ds }}">{{ ds|capitalize }}</option>
+      {% endfor %}
+    </select>
+    
+    <div id="subCategoryContainer" style="display: none;">
+      <label for="subCategorySelect">Choisissez une sous-catégorie :</label>
+      <select id="subCategorySelect"></select>
+      <br>
+      <button onclick="startRevision()">Commencer la révision</button>
+    </div>
+  </div>
+
+  <script>
+    function loadSubCategories() {
+      const ds = document.getElementById('dsSelect').value;
+      const subCategoryContainer = document.getElementById('subCategoryContainer');
+      const subCategorySelect = document.getElementById('subCategorySelect');
+
+      if (!ds) {
+        subCategoryContainer.style.display = 'none';
+        return;
+      }
+
+      fetch(`/get_subcategories/${ds}`)
+        .then(response => response.json())
+        .then(categories => {
+          subCategorySelect.innerHTML = '';
+          categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            subCategorySelect.appendChild(option);
+          });
+          subCategoryContainer.style.display = 'block';
+        });
+    }
+
+    function startRevision() {
+      const ds = document.getElementById('dsSelect').value;
+      const subCategory = document.getElementById('subCategorySelect').value;
+      if (ds && subCategory) {
+        window.location.href = `/revision/${ds}/${encodeURIComponent(subCategory)}`;
+      } else {
+        alert('Veuillez sélectionner un DS et une sous-catégorie.');
+      }
+    }
+  </script>
+</body>
+</html>

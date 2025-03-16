@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Révision - {{ ds|capitalize }} - {{ category }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f3f3f3;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 36px;
+      color: #333;
+    }
+    .mot {
+      font-size: 24px;
+      margin: 20px;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .result {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    #score {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    /* Le bilan est caché au départ */
+    #bilan {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    #bilan ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #bilan ul li {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- La section de révision -->
+  <div class="container">
+    <h1>Révision : {{ ds|capitalize }} - {{ category }}</h1>
+    <p class="mot" id="wordDisplay"></p>
+    <input type="text" id="translationInput" placeholder="Entrez la traduction">
+    <button onclick="checkAnswer()">Vérifier</button>
+    <p class="result" id="resultDisplay"></p>
+    <p id="score">Score : 0 / 0</p>
+  </div>
+
+  <!-- La section bilan -->
+  <div id="bilan">
+    <h2>Bilan Final</h2>
+    <div id="bilanContent"></div>
+    <button onclick="restart()">Recommencer</button>
+  </div>
+
+  <script>
+    const motsData = {{ mots | tojson | safe }};
+    let motsProgress = {}; // Suivi du nombre de bonnes réponses par mot
+    let correctAnswers = 0;
+    let totalAnswers = 0;
+    let motsRestants = [...motsData]; // Liste dynamique des mots à réviser
+    let currentWord = {};
+
+    function loadRandomWord() {
+      if (motsRestants.length === 0) {
+        afficherBilan();
+        return;
+      }
+      currentWord = motsRestants[Math.floor(Math.random() * motsRestants.length)];
+      document.getElementById('wordDisplay').textContent = currentWord.word;
+      document.getElementById('resultDisplay').textContent = '';
+      document.getElementById('translationInput').value = '';
+      document.getElementById('translationInput').focus();
+    }
+
+    function checkAnswer() {
+      const userTranslation = document.getElementById('translationInput').value.trim().toLowerCase();
+      const resultDisplay = document.getElementById('resultDisplay');
+      const scoreDisplay = document.getElementById('score');
+
+      if (!(currentWord.word in motsProgress)) {
+        motsProgress[currentWord.word] = { correct: 0, total: 0 };
+      }
+      motsProgress[currentWord.word].total++;
+
+      if (userTranslation === currentWord.translation.toLowerCase()) {
+        correctAnswers++;
+        motsProgress[currentWord.word].correct++;
+        resultDisplay.textContent = "✅ Correct !";
+        resultDisplay.style.color = "green";
+        // Si l'utilisateur a répondu correctement au moins 2 fois, on retire le mot
+        if (motsProgress[currentWord.word].correct >= 2) {
+          motsRestants = motsRestants.filter(mot => mot.word !== currentWord.word);
+        }
+      } else {
+        resultDisplay.textContent = `❌ Faux, la bonne réponse est : ${currentWord.translation}`;
+        resultDisplay.style.color = "red";
+      }
+
+      totalAnswers++;
+      scoreDisplay.textContent = `Score : ${correctAnswers} / ${totalAnswers}`;
+
+      setTimeout(loadRandomWord, 1000);
+    }
+
+    function afficherBilan() {
+      console.log("Affichage du bilan...");
+      console.log(motsProgress);
+      // Masquer la section de révision en modifiant la visibilité
+      document.querySelector('.container').style.visibility = "hidden";
+      // Afficher le bilan
+      let bilanElement = document.getElementById('bilan');
+      bilanElement.style.display = "block";
+      let bilanContent = "<ul>";
+      for (const mot in motsProgress) {
+        bilanContent += `<li><strong>${mot}</strong> : ${motsProgress[mot].correct} bonnes réponses sur ${motsProgress[mot].total} tentatives.</li>`;
+      }
+      bilanContent += "</ul>";
+      document.getElementById('bilanContent').innerHTML = bilanContent;
+      console.log("Bilan affiché avec succès.");
+    }
+
+    function restart() {
+      motsRestants = [...motsData];
+      motsProgress = {};
+      correctAnswers = 0;
+      totalAnswers = 0;
+      document.getElementById('bilan').style.display = "none";
+      document.querySelector('.container').style.visibility = "visible";
+      document.getElementById('score').textContent = "Score : 0 / 0";
+      loadRandomWord();
+    }
+
+    // Permet de valider avec "Entrée"
+    document.getElementById('translationInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        checkAnswer();
+      }
+    });
+
+    window.onload = loadRandomWord;
+  </script>
+</body>
+</html>
+```
